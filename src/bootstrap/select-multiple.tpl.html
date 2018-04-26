@@ -21,6 +21,14 @@
   <div ng-show="$select.open && $select.items.length > 0" class="ui-select-dropdown dropdown-menu">
     <div class="ui-select-header"></div>
     <div class="ui-select-choices"></div>
+      <button ng-click="$selectMultiple.selectAll()"
+              ng-if="$select.selectAll"
+              ng-disabled="$select.disabled"
+              class="btn btn-link btn-xs">{{$select.selectAll}}</button>
+      <button ng-click="$selectMultiple.clearAll()"
+              ng-if="$select.clearAll"
+              ng-disabled="$select.disabled"
+              class="btn btn-link btn-xs">{{$select.clearAll}}</button>
     <div class="ui-select-footer"></div>
   </div>
   <div class="ui-select-no-choice"></div>

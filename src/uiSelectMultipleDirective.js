@@ -62,6 +62,28 @@ uis.directive('uiSelectMultiple', ['uiSelectMinErr','$timeout', function(uiSelec
         return true;
       };
 
+      ctrl.selectAll = function() {
+        var selectItems = $select.items;
+        if (ctrl.onSelectCallback) {
+          selectItems.forEach(function(item) {
+            $timeout(function() {
+              $select.select(item);
+            });
+          });
+        } else {
+          $timeout(function() {
+            $scope.$broadcast('uis:selectBatch', selectItems);
+          });
+        }
+      };
+
+      ctrl.clearAll = function() {
+        $timeout(function() {
+          $select.selected = [];
+          $select.sizeSearchInput();
+          ctrl.updateModel();
+        });
+      };
 
     }],
     controllerAs: '$selectMultiple',
@@ -181,6 +203,14 @@ uis.directive('uiSelectMultiple', ['uiSelectMinErr','$timeout', function(uiSelec
             $model: $select.parserResult.modelMapper(scope, locals)
           });
         });
+        $selectMultiple.updateModel();
+      });
+
+      scope.$on('uis:selectBatch', function (event, items) {
+        if($select.selected.length >= $select.limit) {
+          return;
+        }
+        Array.prototype.push.apply($select.selected, items);
         $selectMultiple.updateModel();
       });
 

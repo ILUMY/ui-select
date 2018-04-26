@@ -149,6 +149,20 @@ uis.directive('uiSelect',
           }
         });
 
+        attrs.$observe('selectAll', function() {
+          if (attrs.selectAll !== undefined) {
+            var selectAll = scope.$eval(attrs.selectAll);
+            $select.selectAll = selectAll !== undefined ? selectAll === true ? 'Select all' : selectAll : false;
+          }
+        });
+
+        attrs.$observe('clearAll', function() {
+          if (attrs.clearAll !== undefined) {
+            var clearAll = scope.$eval(attrs.clearAll);
+            $select.clearAll = clearAll !== undefined ? clearAll === true ? 'Clear' : clearAll : false;
+          }
+        });
+
         attrs.$observe('spinnerEnabled', function() {
           // $eval() is needed otherwise we get a string instead of a boolean
           var spinnerEnabled = scope.$eval(attrs.spinnerEnabled);

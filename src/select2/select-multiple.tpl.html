@@ -29,6 +29,12 @@
        ng-class="{'select2-display-none': !$select.open || $select.items.length === 0}">
     <div class="ui-select-header"></div>
     <div class="ui-select-choices"></div>
+      <button ng-click="$selectMultiple.selectAll()"
+              ng-if="$select.selectAll"
+              ng-disabled="$select.disabled">{{$select.selectAll}}</button>
+      <button ng-click="$selectMultiple.clearAll()"
+              ng-if="$select.clearAll"
+              ng-disabled="$select.disabled">{{$select.clearAll}}</button>
     <div class="ui-select-footer"></div>
   </div>
 </div>
